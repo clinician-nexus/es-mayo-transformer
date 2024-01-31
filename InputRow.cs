@@ -44,10 +44,14 @@ public class InputRow
   public string? StudentLegalFirstName { get; set; }
   public string? StudentLegalLastName { get; set; }
   public string? StudentPreferredName { get; set; }
+  public string? StudentMiddleName { get; set; }
+  public string? StudentSuffix { get; set; }
   public string? StudentGender { get; set; }
   public string? StudentDateOfBirth { get; set; }
-  public string? StudentHomeAddress { get; set; }
+  public string? StudentHomeAddressLine1 { get; set; }
+  public string? StudentHomeAddressLine2 { get; set; }
   public string? StudentCity { get; set; }
+  public string? StudentState { get; set; }
   public string? StudentCountryOfResidence { get; set; }
   public string? StudentZipOrPostalCode { get; set; }
   public string? StudentSchoolEmailAddress { get; set; }
