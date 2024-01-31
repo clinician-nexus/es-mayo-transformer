@@ -4,6 +4,7 @@ using System;
 using OfficeOpenXml;
 using System.IO;
 using System.Linq.Expressions;
+using System.Text.RegularExpressions;
 
 class Program
 {
@@ -40,15 +41,12 @@ class Program
         // create a function to get the value of a cell in a row by column name
         Func<int, string, string> getCellValue = (row, columnName) =>
         {
-          if (columnIndexes.ContainsKey(columnName.ToLower()))
-          {
-            var columnIndex = columnIndexes[columnName.ToLower()];
-            return worksheet.Cells[row, columnIndex].Value?.ToString();
-          }
-          else
-          {
-            return "";
-          }
+          var regex = new Regex(columnName, RegexOptions.IgnoreCase);
+          var value = columnIndexes
+            .Where(x => regex.IsMatch(x.Key))
+            .Select(x => worksheet.Cells[row, x.Value].Value?.ToString())
+            .FirstOrDefault(x => x != null);
+          return value;
         };
 
         // read all rows in the first worksheet into a list of InputRow objects
@@ -58,37 +56,37 @@ class Program
           var inputRow = new InputRow
           {
             StepName = getCellValue(row, "Step name"),
-            MatchId = getCellValue(row, "match id"),
+            MatchId = getCellValue(row, "Match id"),
             UserName = getCellValue(row, "User name"),
             UserEmail = getCellValue(row, "User email"),
             CompletedDate = getCellValue(row, "Completed date"),
-            CoordinatorNonEmployeeCategory = getCellValue(row, "form Coordinator Step 1) Non-Employee Category"),
-            CoordinatorTypeOfNonEmployee = getCellValue(row, "form Coordinator Step 3) Type of Non-Employee"),
-            StudentLegalFirstName = getCellValue(row, "form Student Demographic Data 1) Legal First Name"),
-            StudentLegalLastName = getCellValue(row, "form Student Demographic Data 2) Legal Last Name"),
-            StudentPreferredName = getCellValue(row, "form Student Demographic Data 3) Preferred Name"),
-            StudentMiddleName = getCellValue(row, "form Student Demographic Data 3) Middle Name"),
-            StudentSuffix = getCellValue(row, "form Student Demographic Data 3) Suffix"),
-            StudentGender = getCellValue(row, "form Student Demographic Data 4) Gender"),
-            StudentDateOfBirth = getCellValue(row, "form Student Demographic Data 5) Date of Birth"),
-            StudentHomeAddressLine1 = getCellValue(row, "form Student Demographic Data 6) Home Address Line 1"),
-            StudentHomeAddressLine2 = getCellValue(row, "form Student Demographic Data 6) Home Address Line 2"),
-            StudentCity = getCellValue(row, "form Student Demographic Data 7) City"),
-            StudentState = getCellValue(row, "form Student Demographic Data 7) State"),
-            StudentCountryOfResidence = getCellValue(row, "form Student Demographic Data 8) Country of Residential Address"),
-            StudentZipOrPostalCode = getCellValue(row, "form Student Demographic Data 9) Zip or Postal Code"),
-            StudentCountryOfCitizenship = getCellValue(row, "form Student Demographic Data 18) What is your country of citizenship?"),
-            StudentCountryOfOrigin = getCellValue(row, "form Student Demographic Data 16) Country of Origin"),
-            StudentVisaType = getCellValue(row, "form Student Demographic Data 20) Visa Type"),
-            CoordinatorWorkState = getCellValue(row, "form Coordinator Step 4) Work State"),
-            StudentSchoolEmailAddress = getCellValue(row, "form Student Demographic Data 10) School Email Address"),
-            StudentPrimaryPhoneNumber = getCellValue(row, "form Student Demographic Data 11) Primary Phone Number"),
+            CoordinatorNonEmployeeCategory = getCellValue(row, "form Coordinator Step .+ Non-Employee Category"),
+            CoordinatorTypeOfNonEmployee = getCellValue(row, "form Coordinator Step .+ Type of Non-Employee"),
+            StudentLegalFirstName = getCellValue(row, "form Student Demographic Data .+ Legal First Name"),
+            StudentLegalLastName = getCellValue(row, "form Student Demographic Data .+ Legal Last Name"),
+            StudentPreferredName = getCellValue(row, "form Student Demographic Data .+ Preferred Name"),
+            StudentMiddleName = getCellValue(row, "form Student Demographic Data .+ Middle Name"),
+            StudentSuffix = getCellValue(row, "form Student Demographic Data .+ Suffix"),
+            StudentGender = getCellValue(row, "form Student Demographic Data .+ Gender"),
+            StudentDateOfBirth = getCellValue(row, "form Student Demographic Data .+ Date of Birth"),
+            StudentHomeAddressLine1 = getCellValue(row, "form Student Demographic Data .+ Home Address Line 1"),
+            StudentHomeAddressLine2 = getCellValue(row, "form Student Demographic Data .+ Home Address Line 2"),
+            StudentCity = getCellValue(row, "form Student Demographic Data .+ City"),
+            StudentState = getCellValue(row, "form Student Demographic Data .+ State"),
+            StudentCountryOfResidence = getCellValue(row, "form Student Demographic Data .+ Country of Residential Address"),
+            StudentZipOrPostalCode = getCellValue(row, "form Student Demographic Data .+ Zip or Postal Code"),
+            StudentCountryOfCitizenship = getCellValue(row, "form Student Demographic Data .+ What is your country of citizenship?"),
+            StudentCountryOfOrigin = getCellValue(row, "form Student Demographic Data .+ Country of Origin"),
+            StudentVisaType = getCellValue(row, "form Student Demographic Data .+ Visa Type"),
+            CoordinatorWorkState = getCellValue(row, "form Coordinator Step .+ Work State"),
+            StudentSchoolEmailAddress = getCellValue(row, "form Student Demographic Data .+ School Email Address"),
+            StudentPrimaryPhoneNumber = getCellValue(row, "form Student Demographic Data .+ Primary Phone Number"),
             MatchStartDate = getCellValue(row, "Match start date"),
             MatchEndDate = getCellValue(row, "Match end date"),
-            CoordinatorCampus = getCellValue(row, "form Coordinator Step 2) Campus"),
-            CoordinatorLengthOfStay = getCellValue(row, "form Coordinator Step 5) Length of Stay"),
-            CoordinatorSupervisorCode = getCellValue(row, "form Coordinator Step 6) Supervisor Code/Reporting Unit"),
-            CoordinatorSupervisorPerID = getCellValue(row, "form Coordinator Step 7) Supervisor Per ID"),
+            CoordinatorCampus = getCellValue(row, "form Coordinator Step .+ Campus"),
+            CoordinatorLengthOfStay = getCellValue(row, "form Coordinator Step .+ Length of Stay"),
+            CoordinatorSupervisorCode = getCellValue(row, "form Coordinator Step .+ Supervisor Code/Reporting Unit"),
+            CoordinatorSupervisorPerID = getCellValue(row, "form Coordinator Step .+ Supervisor Per ID"),
           };
           inputRows.Add(inputRow);
         }

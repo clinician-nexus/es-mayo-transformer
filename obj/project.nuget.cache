@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "pdG0w4AHM6ISPq1RPNWlEg5x3U8UgjAle2f0vDXbF72NzsnIovHy1n54A1IVBWXBwIzgEHaA5NMHn/ceNOBw+w==",
+  "dgSpecHash": "PstzxyxqZobIBGJWHqtS26mJ1Y+EFJHM4b6vJcwjhzOaa3wdgqaWEV37BdkGdwDIAn78rTZ9gqkXHhFPjUcYpg==",
   "success": true,
   "projectFilePath": "C:\\dev\\MayoExcelTransformer\\MayoExcelTransformer.csproj",
   "expectedPackageFiles": [
@@ -23,10 +23,7 @@
     "C:\\Users\\Tim\\.nuget\\packages\\system.security.cryptography.pkcs\\7.0.3\\system.security.cryptography.pkcs.7.0.3.nupkg.sha512",
     "C:\\Users\\Tim\\.nuget\\packages\\system.text.encoding.codepages\\7.0.0\\system.text.encoding.codepages.7.0.0.nupkg.sha512",
     "C:\\Users\\Tim\\.nuget\\packages\\system.text.encodings.web\\7.0.0\\system.text.encodings.web.7.0.0.nupkg.sha512",
-    "C:\\Users\\Tim\\.nuget\\packages\\system.text.json\\7.0.0\\system.text.json.7.0.0.nupkg.sha512",
-    "C:\\Users\\Tim\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\7.0.15\\microsoft.netcore.app.runtime.win-x64.7.0.15.nupkg.sha512",
-    "C:\\Users\\Tim\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\7.0.15\\microsoft.windowsdesktop.app.runtime.win-x64.7.0.15.nupkg.sha512",
-    "C:\\Users\\Tim\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\7.0.15\\microsoft.aspnetcore.app.runtime.win-x64.7.0.15.nupkg.sha512"
+    "C:\\Users\\Tim\\.nuget\\packages\\system.text.json\\7.0.0\\system.text.json.7.0.0.nupkg.sha512"
   ],
   "logs": []
 }
